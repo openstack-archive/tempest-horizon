@@ -29,7 +29,10 @@ class HorizonTempestPlugin(plugins.TempestPlugin):
     def register_opts(self, conf):
         if 'dashboard' not in conf:
             config.register_opt_group(conf, dashboard_config.dashboard_group,
-                                      dashboard_config.BotoGroup)
+                                      dashboard_config.DashboardGroup)
+        if not getattr(conf.service_available, 'horizon'):
+            conf.register_opt(dashboard_config.service_opt,
+                              group='service_available')
 
     def get_opt_lists(self):
         return [('dashboard', config.DashboardGroup)]
