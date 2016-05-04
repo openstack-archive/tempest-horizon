@@ -24,3 +24,7 @@ DashboardGroup = [
                help="Login page for the dashboard",
                deprecated_for_removal=True),
 ]
+
+service_opt = cfg.BoolOpt(
+    'horizon', default=True,
+    help="Whether or not Horizon is expected to be available")
