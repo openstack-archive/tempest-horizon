@@ -25,6 +25,15 @@ DashboardGroup = [
                deprecated_for_removal=True),
 ]
 
-service_opt = cfg.BoolOpt(
-    'horizon', default=True,
-    help="Whether or not Horizon is expected to be available")
+#service_opt = cfg.BoolOpt(
+#    'horizon', default=True,
+#    help="Whether or not Horizon is expected to be available")
+#
+service_available_group = cfg.OptGroup(name="service_available",
+                                       title="Available OpenStack Services")
+
+ServiceAvailableGroup = [
+    cfg.BoolOpt('horizon',
+                default=True,
+                help="Whether or not Horizon is expected to be available"),
+]

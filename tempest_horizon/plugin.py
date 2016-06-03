@@ -15,7 +15,7 @@ import os
 from tempest import config
 from tempest.test_discover import plugins
 
-from tempest_horizon import config as dashboard_config
+from tempest_horizon import config as dash_config
 
 
 class HorizonTempestPlugin(plugins.TempestPlugin):
@@ -27,12 +27,16 @@ class HorizonTempestPlugin(plugins.TempestPlugin):
         return full_test_dir, base_path
 
     def register_opts(self, conf):
-        if 'dashboard' not in conf:
-            config.register_opt_group(conf, dashboard_config.dashboard_group,
-                                      dashboard_config.DashboardGroup)
-        if not getattr(conf.service_available, 'horizon'):
-            conf.register_opt(dashboard_config.service_opt,
-                              group='service_available')
+        config.register_opt_group(conf,
+                                  dash_config.dashboard_group,
+                                  dash_config.DashboardGroup)
+        config.register_opt_group(conf,
+                                  dash_config.service_available_group,
+                                  dash_config.ServiceAvailableGroup)
 
     def get_opt_lists(self):
-        return [('dashboard', config.DashboardGroup)]
+        return [(dash_config.dashboard_group.name,
+                 dash_config.DashboardGroup),
+                (dash_config.service_available_group.name,
+                 dash_config.ServiceAvailableGroup),
+               ]
