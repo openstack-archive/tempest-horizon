@@ -20,6 +20,9 @@ from tempest import config
 from tempest.scenario import manager
 from tempest import test
 
+import ssl
+import sys
+
 CONF = config.CONF
 
 
@@ -65,6 +68,7 @@ class TestDashboardBasicOps(manager.ScenarioTest):
     * logs in as a regular user
     * checks that the user home page loads without error
     """
+    opener = None
 
     @classmethod
     def skip_checks(cls):
@@ -78,12 +82,11 @@ class TestDashboardBasicOps(manager.ScenarioTest):
         super(TestDashboardBasicOps, cls).setup_credentials()
 
     def check_login_page(self):
-        response = request.urlopen(CONF.dashboard.dashboard_url)
-        self.assertIn("id_username", response.read())
+        response = self._get_opener().open(CONF.dashboard.dashboard_url).read()
+        self.assertIn("id_username", response)
 
     def user_login(self, username, password):
-        self.opener = request.build_opener(request.HTTPCookieProcessor())
-        response = self.opener.open(CONF.dashboard.dashboard_url).read()
+        response = self._get_opener().open(CONF.dashboard.dashboard_url).read()
 
         # Grab the CSRF token and default region
         parser = HorizonHTMLParser()
@@ -105,11 +108,30 @@ class TestDashboardBasicOps(manager.ScenarioTest):
                   'region': parser.region,
                   'domain': CONF.auth.default_credentials_domain_name,
                   'csrfmiddlewaretoken': parser.csrf_token}
-        self.opener.open(req, parse.urlencode(params))
+        self._get_opener().open(req, parse.urlencode(params))
 
     def check_home_page(self):
-        response = self.opener.open(CONF.dashboard.dashboard_url)
-        self.assertIn('Overview', response.read())
+        response = self._get_opener().open(CONF.dashboard.dashboard_url).read()
+        self.assertIn('Overview', response)
+
+    def _get_opener(self):
+        if not self.opener:
+            if (CONF.dashboard.disable_ssl_certificate_validation and
+               self._ssl_default_context_supported()):
+                ctx = ssl.create_default_context()
+                ctx.check_hostname = False
+                ctx.verify_mode = ssl.CERT_NONE
+                self.opener = request.build_opener(
+                    request.HTTPSHandler(context=ctx),
+                    request.HTTPCookieProcessor())
+            else:
+                self.opener = request.build_opener(
+                    request.HTTPCookieProcessor())
+        return self.opener
+
+    def _ssl_default_context_supported(self):
+        return ((sys.version_info[0] == 2 and sys.version_info[2] >= 9) or
+                (sys.version_info[0] == 3))
 
     @test.idempotent_id('4f8851b1-0e69-482b-b63b-84c6e76f6c80')
     def test_basic_scenario(self):

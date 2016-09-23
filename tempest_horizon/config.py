@@ -23,9 +23,12 @@ DashboardGroup = [
                default='http://localhost/auth/login/',
                help="Login page for the dashboard",
                deprecated_for_removal=True),
+    cfg.BoolOpt('disable_ssl_certificate_validation',
+                default=False,
+                help="Set to True if using self-signed SSL certificates."),
 ]
 
-#service_opt = cfg.BoolOpt(
+# service_opt = cfg.BoolOpt(
 #    'horizon', default=True,
 #    help="Whether or not Horizon is expected to be available")
 #
