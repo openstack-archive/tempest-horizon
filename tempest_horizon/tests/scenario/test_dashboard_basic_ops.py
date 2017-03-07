@@ -17,8 +17,8 @@ from six.moves.urllib import parse
 from six.moves.urllib import request
 
 from tempest import config
+from tempest.lib import decorators
 from tempest.scenario import manager
-from tempest import test
 
 import ssl
 import sys
@@ -133,7 +133,7 @@ class TestDashboardBasicOps(manager.ScenarioTest):
         return ((sys.version_info[0] == 2 and sys.version_info[2] >= 9) or
                 (sys.version_info[0] == 3))
 
-    @test.idempotent_id('4f8851b1-0e69-482b-b63b-84c6e76f6c80')
+    @decorators.idempotent_id('4f8851b1-0e69-482b-b63b-84c6e76f6c80')
     def test_basic_scenario(self):
         creds = self.os.credentials
         self.check_login_page()
