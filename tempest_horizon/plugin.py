@@ -35,8 +35,8 @@ class HorizonTempestPlugin(plugins.TempestPlugin):
                                   dash_config.ServiceAvailableGroup)
 
     def get_opt_lists(self):
-        return [(dash_config.dashboard_group.name,
-                 dash_config.DashboardGroup),
-                (dash_config.service_available_group.name,
-                 dash_config.ServiceAvailableGroup),
-               ]
+        return [
+            (dash_config.dashboard_group.name, dash_config.DashboardGroup),
+            (dash_config.service_available_group.name,
+                dash_config.ServiceAvailableGroup),
+        ]
