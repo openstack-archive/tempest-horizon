@@ -18,7 +18,7 @@ from six.moves.urllib import request
 
 from tempest import config
 from tempest.lib import decorators
-from tempest.scenario import manager
+from tempest import test
 
 import ssl
 import sys
@@ -59,7 +59,7 @@ class HorizonHTMLParser(HTMLParser.HTMLParser):
             self.login = self._find_attr_value(attrs, 'action')
 
 
-class TestDashboardBasicOps(manager.ScenarioTest):
+class TestDashboardBasicOps(test.BaseTestCase):
 
     """The test suite for dashboard basic operations
 
@@ -69,6 +69,8 @@ class TestDashboardBasicOps(manager.ScenarioTest):
     * checks that the user home page loads without error
     """
     opener = None
+
+    credentials = ['primary']
 
     @classmethod
     def skip_checks(cls):
