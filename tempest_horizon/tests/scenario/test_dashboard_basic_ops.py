@@ -137,7 +137,7 @@ class TestDashboardBasicOps(test.BaseTestCase):
 
     @decorators.idempotent_id('4f8851b1-0e69-482b-b63b-84c6e76f6c80')
     def test_basic_scenario(self):
-        creds = self.os.credentials
+        creds = self.os_primary.credentials
         self.check_login_page()
         self.user_login(creds.username, creds.password)
         self.check_home_page()
