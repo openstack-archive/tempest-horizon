@@ -21,7 +21,6 @@ from tempest.lib import decorators
 from tempest import test
 
 import ssl
-import sys
 
 CONF = config.CONF
 
@@ -132,8 +131,7 @@ class TestDashboardBasicOps(test.BaseTestCase):
         return self.opener
 
     def _ssl_default_context_supported(self):
-        return ((sys.version_info[0] == 2 and sys.version_info[2] >= 9) or
-                (sys.version_info[0] == 3))
+        return (hasattr(ssl, 'create_default_context'))
 
     @decorators.idempotent_id('4f8851b1-0e69-482b-b63b-84c6e76f6c80')
     def test_basic_scenario(self):
