@@ -1,0 +1,9 @@
+---
+- project:
+    name: openstack/tempest-horizon
+    check:
+      jobs:
+        - horizon-dsvm-tempest-plugin
+    gate:
+      jobs:
+        - horizon-dsvm-tempest-plugin
