@@ -1,6 +1,4 @@
----
 - project:
-    name: openstack/tempest-horizon
     check:
       jobs:
         - horizon-dsvm-tempest-plugin
