@@ -133,6 +133,7 @@ class TestDashboardBasicOps(test.BaseTestCase):
     def _ssl_default_context_supported(self):
         return (hasattr(ssl, 'create_default_context'))
 
+    @decorators.attr(type='smoke')
     @decorators.idempotent_id('4f8851b1-0e69-482b-b63b-84c6e76f6c80')
     def test_basic_scenario(self):
         creds = self.os_primary.credentials
