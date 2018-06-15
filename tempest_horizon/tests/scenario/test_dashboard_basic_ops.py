@@ -84,14 +84,14 @@ class TestDashboardBasicOps(test.BaseTestCase):
 
     def check_login_page(self):
         response = self._get_opener().open(CONF.dashboard.dashboard_url).read()
-        self.assertIn("id_username", response)
+        self.assertIn("id_username", response.decode("utf-8"))
 
     def user_login(self, username, password):
         response = self._get_opener().open(CONF.dashboard.dashboard_url).read()
 
         # Grab the CSRF token and default region
         parser = HorizonHTMLParser()
-        parser.feed(response)
+        parser.feed(response.decode("utf-8"))
 
         # construct login url for dashboard, discovery accommodates non-/ web
         # root for dashboard
@@ -109,11 +109,11 @@ class TestDashboardBasicOps(test.BaseTestCase):
                   'region': parser.region,
                   'domain': CONF.auth.default_credentials_domain_name,
                   'csrfmiddlewaretoken': parser.csrf_token}
-        self._get_opener().open(req, parse.urlencode(params))
+        self._get_opener().open(req, parse.urlencode(params).encode())
 
     def check_home_page(self):
         response = self._get_opener().open(CONF.dashboard.dashboard_url).read()
-        self.assertIn('Overview', response)
+        self.assertIn('Overview', response.decode("utf-8"))
 
     def _get_opener(self):
         if not self.opener:
