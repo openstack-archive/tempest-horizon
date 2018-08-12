@@ -4,7 +4,6 @@
 
 pbr!=2.1.0,>=2.0.0 # Apache-2.0
 Babel!=2.4.0,>=2.3.4 # BSD
-# tempest>=6.0.0
 oslo.config>=4.6.0 # Apache-2.0
 oslo.log>=3.30.0 # Apache-2.0
 six>=1.10.0 # MIT
