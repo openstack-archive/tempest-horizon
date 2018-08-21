@@ -1,7 +1,12 @@
 - project:
+    templates:
+      - check-requirements
     check:
       jobs:
         - horizon-dsvm-tempest-plugin
+        - openstack-tox-pep8
     gate:
+      queue: horizon
       jobs:
         - horizon-dsvm-tempest-plugin
+        - openstack-tox-pep8
