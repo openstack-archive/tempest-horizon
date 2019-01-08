@@ -19,19 +19,11 @@ DashboardGroup = [
     cfg.StrOpt('dashboard_url',
                default='http://localhost/',
                help="Where the dashboard can be found"),
-    cfg.StrOpt('login_url',
-               default='http://localhost/auth/login/',
-               help="Login page for the dashboard",
-               deprecated_for_removal=True),
     cfg.BoolOpt('disable_ssl_certificate_validation',
                 default=False,
                 help="Set to True if using self-signed SSL certificates."),
 ]
 
-# service_opt = cfg.BoolOpt(
-#    'horizon', default=True,
-#    help="Whether or not Horizon is expected to be available")
-#
 service_available_group = cfg.OptGroup(name="service_available",
                                        title="Available OpenStack Services")
 
