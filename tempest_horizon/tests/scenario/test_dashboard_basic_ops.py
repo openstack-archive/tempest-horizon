@@ -12,9 +12,9 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 
-from six.moves import html_parser as HTMLParser
-from six.moves.urllib import parse
-from six.moves.urllib import request
+import html.parser
+from urllib import parse
+from urllib import request
 
 from tempest import config
 from tempest.lib import decorators
@@ -25,7 +25,7 @@ import ssl
 CONF = config.CONF
 
 
-class HorizonHTMLParser(HTMLParser.HTMLParser):
+class HorizonHTMLParser(html.parser.HTMLParser):
     csrf_token = None
     region = None
     login = None
