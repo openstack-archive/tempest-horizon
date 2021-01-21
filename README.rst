@@ -1,25 +1,10 @@
-========================
-Team and repository tags
-========================
+The code has been merged into openstack/tempest.
 
-.. image:: https://governance.openstack.org/badges/tempest-horizon.svg
-    :target: https://governance.openstack.org/reference/tags/index.html
+The contents of this repository are still available in the Git
+source code management system. To see the contents of this
+repository before it was merged into the tempest repo,
+please check out the previous commit with "git checkout HEAD^1".
 
-.. Change things from this point on
-
-===============
-tempest-horizon
-===============
-
-Tempest Plugin for Horizon tests
-
-* Free software: Apache license
-
-Using
------
-
-Install this plugin in the same python environment as tempest.
-
-In tempest directory, run::
-
-  stestr run tempest_horizon.tests.scenario.test_dashboard_basic_ops.TestDashboardBasicOps
+For any further questions, please email
+openstack-discuss@lists.openstack.org or
+join #openstack-qa or #openstack-horizon on Freenode.
